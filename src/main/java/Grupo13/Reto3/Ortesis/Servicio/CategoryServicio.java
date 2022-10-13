@@ -30,7 +30,7 @@ public class CategoryServicio {
             return categoryRepositorio.save(category);
         } else {
             Optional<Category> category1 = categoryRepositorio.getCategory(category.getId());
-            if (category1.isEmpty()) {
+            if (category1.isPresent()) {
                 return categoryRepositorio.save(category);
             } else {
                 return category;
@@ -41,7 +41,7 @@ public class CategoryServicio {
     public Category update(Category category){
         if(category.getId()!=null){
             Optional<Category>g= categoryRepositorio.getCategory(category.getId());
-            if(!g.isEmpty()){
+            if(!g.isPresent()){
                 if(category.getDescription()!=null){
                     g.get().setDescription(category.getDescription());
                 }
