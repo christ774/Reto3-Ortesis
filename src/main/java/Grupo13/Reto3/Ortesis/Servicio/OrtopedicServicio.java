@@ -30,7 +30,7 @@ public class OrtopedicServicio {
             return ortopedicRepositorio.save(ortopedic);
         }else{
             Optional<Ortopedic>e= ortopedicRepositorio.getOrtopedic(ortopedic.getId());
-            if(e.isPresent()){
+            if(e.isEmpty()){
                 return ortopedicRepositorio.save(ortopedic);
             }else{
                 return ortopedic;
@@ -41,7 +41,7 @@ public class OrtopedicServicio {
        public Ortopedic update(Ortopedic ortopedic){
         if(ortopedic.getId()!=null){
             Optional<Ortopedic> e= ortopedicRepositorio.getOrtopedic(ortopedic.getId());
-            if(!e.isPresent()){
+            if(!e.isEmpty()){
                 if(ortopedic.getName()!=null){
                     e.get().setName(ortopedic.getName());
                 }
