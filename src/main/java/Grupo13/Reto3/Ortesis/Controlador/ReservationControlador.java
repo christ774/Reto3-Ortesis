@@ -8,6 +8,9 @@ import Grupo13.Reto3.Ortesis.Modelo.Reservation;
 import Grupo13.Reto3.Ortesis.Servicio.ReservationServicio;
 import java.util.List;
 import java.util.Optional;
+
+import Grupo13.Reto3.Ortesis.reporte.ContadorClient;
+import Grupo13.Reto3.Ortesis.reporte.StatusReservas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +46,21 @@ public class ReservationControlador {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id){
         return reservationServicio.deleteReservation(id);
+    }
+
+    @GetMapping("/report-status")
+    public StatusReservas getStatusReservas() {
+        return reservationServicio.getReservacionStatus();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservasTiempo(@PathVariable("dateOne") String fechaInicial,@PathVariable("dateTwo") String fechaFinal) {
+        return reservationServicio.getReservacionTiempo(fechaInicial, fechaFinal);
+    }
+
+    @GetMapping("/report-clients")
+    public List<ContadorClient> getReservationReportClient() {
+        return reservationServicio.getTopClients();
     }
   
 }
